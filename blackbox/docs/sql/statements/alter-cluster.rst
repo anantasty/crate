@@ -18,8 +18,9 @@ Synopsis
 ::
 
     ALTER CLUSTER
-      { REROUTE RETRY FAILED }
-
+      { REROUTE RETRY FAILED
+        | SET LICENSE WITH (license_parameters)
+      }
 
 Description
 ===========
@@ -50,3 +51,21 @@ get acknowledged.
     Additionally, keep in mind that this statement only triggers the shard
     re-allocation and is therefore asynchronous. Unassigned shards with large
     size will take some time to allocate.
+
+``SET LICENSE``
+---------------
+
+Registers license information to the cluster state based on the ``license_parameters``::
+
+    {
+      expiration_date = value
+      issued_to = value
+      signature = value
+    }
+
+:expiration_date:
+   The date on which the license expires
+:issued_to:
+   The organisation where license is issued
+:signature:
+   the license signature used for verification
