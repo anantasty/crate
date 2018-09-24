@@ -28,7 +28,6 @@ import io.crate.expression.scalar.AbstractScalarFunctionsTest;
 import io.crate.expression.symbol.Function;
 import io.crate.expression.symbol.Literal;
 import io.crate.expression.symbol.Symbol;
-import io.crate.expression.symbol.Value;
 import io.crate.metadata.Reference;
 import io.crate.metadata.SearchPath;
 import io.crate.metadata.TransactionContext;
@@ -51,12 +50,12 @@ public class LogFunctionTest extends AbstractScalarFunctionsTest {
 
     private LogFunction getFunction(String name, DataType value) {
         return (LogFunction) functions.get(
-            null, name, Collections.singletonList(new Value(value)), SearchPath.pathWithPGCatalogAndDoc());
+            null, name, Collections.singletonList(Literal.of(value, null)), SearchPath.pathWithPGCatalogAndDoc());
     }
 
     private LogFunction getFunction(String name, DataType value, DataType base) {
         return (LogFunction) functions.get(
-            null, name, Arrays.asList(new Value(value), new Value(base)), SearchPath.pathWithPGCatalogAndDoc());
+            null, name, Arrays.asList(Literal.of(value, null), Literal.of(base, null)), SearchPath.pathWithPGCatalogAndDoc());
     }
 
     private Symbol normalizeLog(Number value, DataType valueType) {
